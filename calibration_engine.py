@@ -9,16 +9,18 @@ class CalibrationEngine:
     """
 
     def __init__(self):
-        # Known true LAB values of the 6 reference patches on the physical card
-        # These are calibrated under a standard D65 illuminant in a lab.
-        # Patch order: White, Black, Red, Green, Blue, Yellow (Example standard)
+        # Known true LAB values of the 6 reference patches on the physical card.
+        # Computed from measured hex codes under standard D65 illuminant:
+        #   White #FFFFFF, Black #0A0A0A, Red #CC0000,
+        #   Green #009A44, Blue #2555F5, Yellow #FFC300
+        # Patch order: White, Black, Red, Green, Blue, Yellow
         self.reference_lab_values = np.array([
-            [100.0, 0.0, 0.0],     # White
-            [0.0, 0.0, 0.0],       # Black
-            [53.24, 80.09, 67.20], # Red
-            [87.73, -86.18, 83.18],# Green
-            [32.30, 79.18, -107.86],# Blue
-            [97.13, -21.55, 94.47] # Yellow
+            [100.0,    0.0,    0.0],   # White  (#FFFFFF)
+            [  1.6,    0.0,    0.0],   # Black  (#0A0A0A)
+            [ 41.2,   61.4,   52.2],   # Red    (#CC0000)
+            [ 55.4,  -52.8,   35.6],   # Green  (#009A44)
+            [ 41.2,   35.6,  -80.2],   # Blue   (#2555F5)
+            [ 81.1,    6.0,   82.4],   # Yellow (#FFC300)
         ])
 
     def rgb_to_lab(self, rgb_color):
